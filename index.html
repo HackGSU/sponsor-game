@@ -6,15 +6,64 @@
   <script src="js/helpers.js"></script>
   <style>
   canvas {
-    background-color: black;
+    background-color: #000;
     display: block;
     position: absolute;
     margin: auto;
-    margin: 0px 0px 0px 0px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
   </style>
 </head>
 <body>
-  <script></script>
+  <script>
+    var screen, input, frames;
+    var geSprite, msSprite, gsuSprite;
+    var aliens, dir, tank, bullets, cities;
+
+    function main() {
+      screen = new Screen(510, 600);
+      input = new InputHandler();
+
+      var img = new Image();
+      img.addEventListener("load", function() {
+        geSprite = [
+          [new Sprite(this, 0, 0, 32, 32), new Sprite(this, 0, 0, 32, 32)],
+          [new Sprite(this, 0, 0, 32, 32), new Sprite(this, 22, 16, 16, 16)],
+          [new Sprite(this, 38, 0, 24, 16), new Sprite(this, 38, 16, 24, 16)]
+        ];
+        msSprite = new Sprite(this);
+        gsuSprite = new Sprite(this);
+
+        init();
+        run();
+      });
+      img.src = "res/ge_min.png";
+    };
+
+    function init() {};
+
+    function run() {
+      console.log("Hi!");
+      var loop = function() {
+        update();
+        render();
+        window.requestAnimationFrame(loop, screen.canvas);
+      };
+      window.requestAnimationFrame(loop, screen.canvas);
+    };
+
+    function update() {};
+
+    function render() {
+      screen.drawSprite(geSprite[0][0], 10, 10);
+      screen.drawSprite(geSprite[0][1], 47, 10);
+      screen.drawSprite(geSprite[1][0], 84, 10);
+    };
+
+  main();
+  </script>
 </body>
 </html>
