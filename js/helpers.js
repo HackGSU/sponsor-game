@@ -10,6 +10,10 @@ function Screen(width, height) {
   document.body.appendChild(this.canvas);
 };
 
+Screen.prototype.clear = function() {
+  this.ctx.clearRect(0, 0, this.width, this.height);
+}
+
 Screen.prototype.drawSprite = function(sp, x, y) {
   this.ctx.drawImage(sp.img, sp.x, sp.y, sp.w, sp.h, x, y, sp.w, sp.h);
 };
@@ -47,4 +51,5 @@ InputHandler.prototype.isPressed = function(code) {
     return this.pressed[code] = true;
   }
   return false;
+
 };

@@ -20,8 +20,8 @@
 <body>
   <script>
     var screen, input, frames;
-    var geSprite, msSprite, gsuSprite;
-    var aliens, dir, tank, bullets, cities;
+    var geSprite, plSprite, gsuSprite;
+    var aliens, dir, player, bullets, cities;
 
     function main() {
       screen = new Screen(510, 600);
@@ -30,20 +30,47 @@
       var img = new Image();
       img.addEventListener("load", function() {
         geSprite = [
-          [new Sprite(this, 0, 0, 32, 32), new Sprite(this, 0, 0, 32, 32)],
-          [new Sprite(this, 0, 0, 32, 32), new Sprite(this, 22, 16, 16, 16)],
-          [new Sprite(this, 38, 0, 24, 16), new Sprite(this, 38, 16, 24, 16)]
+          [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
+          [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
+          [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)]
         ];
-        msSprite = new Sprite(this);
-        gsuSprite = new Sprite(this);
+        plSprite = new Sprite(this, 0, 0, 22, 16);
+        gsuSprite = new Sprite(this, 84, 8, 36, 24);
 
         init();
         run();
       });
-      img.src = "res/ge_min.png";
+      img.src = "res/ge_mini.png";
     };
 
-    function init() {};
+    function init() {
+      frames = 0;
+      spFrame = 0;
+      lvFrame = 10;
+      dir = 1;
+
+      player = {
+        sprite: plSprite,
+        x: (screen.width - plSprite.w) / 2,
+        y: screen.height - (30 + plSprite.h)
+
+      }
+
+      aliens = [];
+      var rows = [1, 0, 0 , 2, 2];
+      for (var i = 0, len = rows.length; i < len; i++) {
+        for (var j = 0; j < 10; j++) {
+          var a = rows[i];
+          aliens.push({
+            sprite: geSprite[a],
+            x: 30 + j*30 + [0, 0, 0][a],
+            y: 30 + i*30,
+            w: geSprite[a][0].w,
+            h: geSprite[a][0].h
+          });
+        }
+      }
+    };
 
     function run() {
       console.log("Hi!");
@@ -55,12 +82,46 @@
       window.requestAnimationFrame(loop, screen.canvas);
     };
 
-    function update() {};
+    function update() {
+
+      if (input.isDown(37)) { //LEFT
+        player.x -= 10;
+      }
+      if (input.isDown(39)) { //RIGHT
+        player.x += 10;
+      }
+
+      frames++;
+      if (frames % lvFrame === 0){
+        spFrame = (spFrame + 1) % 2;
+
+        var max_ = 0, min_ = screen.width;
+        for (var i = 0, len = aliens.length; i < len; i++) {
+          var a = aliens[i];
+          a.x += 30 * dir;
+
+          max_ = Math.max(max_, a.x + a.w);
+          min_ = Math.min(min_, a.x);
+        }
+
+        if (max_ > screen.width || min_ < 30) {
+          dir *= -1;
+          for (var i = 0, len = aliens.length; i < len; i++) {
+            aliens[i].x += 30 * dir;
+            aliens[i].y += 30;
+          }
+        }
+      }
+    };
 
     function render() {
-      screen.drawSprite(geSprite[0][0], 10, 10);
-      screen.drawSprite(geSprite[0][1], 47, 10);
-      screen.drawSprite(geSprite[1][0], 84, 10);
+      screen.clear();
+
+      for (var i = 0, len = aliens.length; i < len; i++) {
+        var a = aliens[i];
+        screen.drawSprite(a.sprite[spFrame], a.x, a.y);
+      }
+      screen.drawSprite(player.sprite, player.x, player.y);
     };
 
   main();
