@@ -32,6 +32,8 @@
         geSprite = [
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
+          [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
+          [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)]
         ];
         plSprite = new Sprite(this, 0, 0, 22, 16);
@@ -90,6 +92,16 @@
       if (input.isDown(39)) { //RIGHT
         player.x += 10;
       }
+      if (input.isDown(40)) { //UP
+        player.y += 10;
+      }
+      if (input.isDown(38)) { //DOWN
+        player.y -= 10;
+      }
+      //Max Width of movement
+      player.x = Math.max(Math.min(player.x, screen.width - (30 + plSprite.w)), 30);
+      //Max Height of movement
+      player.y = Math.max(Math.min(player.y, screen.height - (30 + plSprite.h)), 300);
 
       frames++;
       if (frames % lvFrame === 0){
