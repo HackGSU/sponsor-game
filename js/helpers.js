@@ -1,5 +1,19 @@
 // Helper functions
 
+//Projectile
+function Projectile(x, y, vely, w, h, color) {
+  this.x = x;
+  this.y = y;
+  this.vely = vely;
+  this.width = w;
+  this.height = h;
+  this.color = color;
+};
+
+Projectile.prototype.update = function() {
+  this.y += this.vely;
+};
+
 // Screen
 function Screen(width, height) {
   this.canvas = document.createElement("canvas");
@@ -16,6 +30,12 @@ Screen.prototype.clear = function() {
 
 Screen.prototype.drawSprite = function(sp, x, y) {
   this.ctx.drawImage(sp.img, sp.x, sp.y, sp.w, sp.h, x, y, sp.w, sp.h);
+};
+
+//draw Projectile
+Screen.prototype.drawProjectile = function(projectile) {
+  this.ctx.fillStyle = projectile.color;
+  this.ctx.fillRect(projectile.x, projectile.y, projectile.width, projectile.height);
 };
 // Sprite
 function Sprite(img, x, y, w, h) {

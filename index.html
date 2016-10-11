@@ -21,10 +21,10 @@
   <script>
     var screen, input, frames;
     var geSprite, plSprite, gsuSprite;
-    var aliens, dir, player, bullets, cities;
+    var aliens, dir, player, projectiles, cities;
 
     function main() {
-      screen = new Screen(510, 600);
+      screen = new Screen(504, 600);
       input = new InputHandler();
 
       var img = new Image();
@@ -48,15 +48,16 @@
     function init() {
       frames = 0;
       spFrame = 0;
-      lvFrame = 10;
+      lvFrame = 5;
       dir = 1;
 
       player = {
         sprite: plSprite,
         x: (screen.width - plSprite.w) / 2,
         y: screen.height - (30 + plSprite.h)
-
       }
+
+      projectiles = [];
 
       aliens = [];
       var rows = [1, 0, 0 , 2, 2];
@@ -87,21 +88,30 @@
     function update() {
 
       if (input.isDown(37)) { //LEFT
-        player.x -= 10;
+        player.x -= 15;
       }
       if (input.isDown(39)) { //RIGHT
-        player.x += 10;
+        player.x += 15;
       }
       if (input.isDown(40)) { //UP
-        player.y += 10;
+        player.y += 15;
       }
       if (input.isDown(38)) { //DOWN
-        player.y -= 10;
+        player.y -= 15;
       }
       //Max Width of movement
       player.x = Math.max(Math.min(player.x, screen.width - (30 + plSprite.w)), 30);
       //Max Height of movement
       player.y = Math.max(Math.min(player.y, screen.height - (30 + plSprite.h)), 300);
+
+      //creates the projectiles
+      if (input.isPressed(32)) {
+        projectiles.push(new Projectile(player.x, player.y, -8, 2, 6, "#fff"));
+      }
+
+      for (var i = 0, len = projectiles.length; i < len; i++) {
+        projectiles[i].update();
+      }
 
       frames++;
       if (frames % lvFrame === 0){
@@ -116,7 +126,7 @@
           min_ = Math.min(min_, a.x);
         }
 
-        if (max_ > screen.width || min_ < 30) {
+        if (max_ > screen.width -30 || min_ < 30) {
           dir *= -1;
           for (var i = 0, len = aliens.length; i < len; i++) {
             aliens[i].x += 30 * dir;
@@ -133,6 +143,13 @@
         var a = aliens[i];
         screen.drawSprite(a.sprite[spFrame], a.x, a.y);
       }
+
+      screen.ctx.save();
+      for (var i = 0, len = projectiles.length; i < len; i++) {
+        screen.drawProjectile(projectiles[i]);
+      }
+      screen.ctx.restore();
+
       screen.drawSprite(player.sprite, player.x, player.y);
     };
 
