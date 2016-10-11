@@ -106,7 +106,7 @@
 
       //creates the projectiles
       if (input.isPressed(32)) {
-        projectiles.push(new Projectile(player.x, player.y, -8, 2, 6, "#fff"));
+        projectiles.push(new Projectile(player.x + 6, player.y - 5, -8, 2, 6, "#fff"));
       }
 
       for (var i = 0, len = projectiles.length; i < len; i++) {
