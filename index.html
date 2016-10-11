@@ -110,7 +110,18 @@
       }
 
       for (var i = 0, len = projectiles.length; i < len; i++) {
+        var p = projectiles[i];
+
         projectiles[i].update();
+
+        //Projectile collision with monsters
+        //Minbounds and Maxbounds
+        if (p.y + p.height < 0 || p.y > screen.height) {
+          projectiles.splice(i, 1);
+          i--;
+          len--;
+          continue;
+        }
       }
 
       frames++;
