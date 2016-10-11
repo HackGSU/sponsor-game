@@ -121,8 +121,21 @@
           len--;
           continue;
         }
+        //Remove aliens when hit with projectiles
+        for (var j = 0, len2 = aliens.length; j < len2; j++) {
+          var a = aliens[j];
+          if (AABBIntersect(p.x, p.y, p.width, p.height, a.x, a.y, a.w, a.h)) {
+            aliens.splice(j, 1);
+            j--;
+            len2--;
+            projectiles.splice(i, 1);
+            i--;
+            len--;
+          }
+        }
       }
       //Aliens to fire projectiles
+      //Math.random generates number from [0.0, 1) multiple by 60 to get avg # of frames passed per shot
       if (Math.random() < 0.99 && aliens.length > 0) {
         //Select random alien object b to fire from alien objects array
         var a = aliens[Math.round(Math.random() * (aliens.length - 1))];
