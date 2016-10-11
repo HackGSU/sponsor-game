@@ -20,7 +20,7 @@
 <body>
   <script>
     var screen, input, frames;
-    var geSprite, plSprite, gsuSprite, waveCount;
+    var geSprite, plSprite, bossSprite, waveCount;
     var aliens, dir, player, projectiles, cities;
 
     function main() {
@@ -37,7 +37,9 @@
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)]
         ];
         plSprite = new Sprite(this, 0, 0, 22, 16);
-        gsuSprite = new Sprite(this, 84, 8, 36, 24);
+        bossSprite = [
+          [new Sprite(this, 0, 0, 100, 100), new Sprite(this, 0, 0, 100, 100)]
+        ];
 
         init();
         run();
@@ -108,8 +110,8 @@
       player.y = Math.max(Math.min(player.y, screen.height - (30 + plSprite.h)), 300);
 
       //creates the projectiles
-      if (input.isPressed(32)) {
-        projectiles.push(new Projectile(player.x + 6, player.y - 5, -8, 2, 6, "#fff"));
+      if (input.isDown(32)) {
+        projectiles.push(new Projectile(player.x + 6, player.y - 5, -20, 2, 50, "#fff"));
       }
 
       for (var i = 0, len = projectiles.length; i < len; i++) {
@@ -181,22 +183,30 @@
       if (aliens.length === 0 && waveCount === 2) {
         //set waveCount to 2nd Wave
         waveCount++;
+        console.log("test!");
         //set what types of monsters you want on each row
-        var rows = [1, 0, 0 , 2, 2];
+        var rows = [0];
         //populate the aliens array with monster objects
         for (var i = 0, len = rows.length; i < len; i++) {
-          for (var j = 0; j < 10; j++) {
+          for (var j = 0; j < 1; j++) {
             var a = rows[i];
             aliens.push({
-              sprite: geSprite[a],
-              x: 30 + j*30 + [0, 0, 0][a],
-              y: 30 + i*30,
-              w: geSprite[a][0].w,
-              h: geSprite[a][0].h
+              sprite: bossSprite[a],
+              x: 200 + j*30,
+              y: 100 + i*30,
+              w: bossSprite[a][0].w,
+              h: bossSprite[a][0].h
             });
           }
         }
       }
+
+      //END CREDITS
+      if (aliens.length === 0 && waveCount === 3) {
+        //set waveCount to 2nd Wave
+        waveCount++;
+        console.log("CONGRATULATIONS!");
+          }
 
       frames++;
       if (frames % lvFrame === 0){
