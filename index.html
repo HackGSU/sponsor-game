@@ -20,7 +20,7 @@
 <body>
   <script>
     var screen, input, frames;
-    var geSprite, plSprite, gsuSprite;
+    var geSprite, plSprite, gsuSprite, waveCount;
     var aliens, dir, player, projectiles, cities;
 
     function main() {
@@ -49,6 +49,7 @@
       frames = 0;
       spFrame = 0;
       lvFrame = 50;
+      waveCount = 1;
       dir = 1;
 
       player = {
@@ -60,7 +61,9 @@
       projectiles = [];
 
       aliens = [];
+      //set what types of monsters you want on each row
       var rows = [1, 0, 0 , 2, 2];
+      //populate the 1st WAVE aliens array with monster objects
       for (var i = 0, len = rows.length; i < len; i++) {
         for (var j = 0; j < 10; j++) {
           var a = rows[i];
@@ -149,6 +152,50 @@
         }
         //Generate new projectile to be drawn and fired from selected alien object
         projectiles.push(new Projectile(a.x + a.w*0.5, a.y + a.h, 5, 2, 4, "#fff"));
+      }
+
+      //2ND WAVE
+      //create a new alien object array when all monsters are destroyed
+      if (aliens.length === 0 && waveCount === 1) {
+        //set waveCount to 2nd Wave
+        waveCount++;
+        //set what types of monsters you want on each row
+        var rows = [1, 0, 0 , 2, 2];
+        //populate the aliens array with monster objects
+        for (var i = 0, len = rows.length; i < len; i++) {
+          for (var j = 0; j < 10; j++) {
+            var a = rows[i];
+            aliens.push({
+              sprite: geSprite[a],
+              x: 30 + j*30 + [0, 0, 0][a],
+              y: 30 + i*30,
+              w: geSprite[a][0].w,
+              h: geSprite[a][0].h
+            });
+          }
+        }
+      }
+
+      //BOSS LEVEL
+      //create a new BOSS alien object array when all monsters are destroyed
+      if (aliens.length === 0 && waveCount === 2) {
+        //set waveCount to 2nd Wave
+        waveCount++;
+        //set what types of monsters you want on each row
+        var rows = [1, 0, 0 , 2, 2];
+        //populate the aliens array with monster objects
+        for (var i = 0, len = rows.length; i < len; i++) {
+          for (var j = 0; j < 10; j++) {
+            var a = rows[i];
+            aliens.push({
+              sprite: geSprite[a],
+              x: 30 + j*30 + [0, 0, 0][a],
+              y: 30 + i*30,
+              w: geSprite[a][0].w,
+              h: geSprite[a][0].h
+            });
+          }
+        }
       }
 
       frames++;
