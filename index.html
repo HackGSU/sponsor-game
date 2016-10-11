@@ -110,8 +110,8 @@
       player.y = Math.max(Math.min(player.y, screen.height - (30 + plSprite.h)), 300);
 
       //creates the projectiles
-      if (input.isDown(32)) {
-        projectiles.push(new Projectile(player.x + 6, player.y - 5, -20, 2, 50, "#fff"));
+      if (true) {
+        projectiles.push(new Projectile(player.x + 15, player.y - 34, -20, 2, 50, "#fff"));
       }
 
       for (var i = 0, len = projectiles.length; i < len; i++) {
