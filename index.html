@@ -20,7 +20,7 @@
 <body>
   <script>
     var screen, input, frames;
-    var geSprite, plSprite, bossSprite, waveCount;
+    var sponserSprite, plSprite, bossSprite, waveCount;
     var aliens, dir, player, projectiles, cities;
 
     function main() {
@@ -29,22 +29,22 @@
 
       var img = new Image();
       img.addEventListener("load", function() {
-        geSprite = [
+        sponserSprite = [
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)]
         ];
-        plSprite = new Sprite(this, 0, 0, 22, 16);
+        plSprite = new Sprite(this, 0, 0, 32, 32);
         bossSprite = [
-          [new Sprite(this, 0, 0, 100, 100), new Sprite(this, 0, 0, 100, 100)]
+          [new Sprite(this, 0, 0, 32, 32), new Sprite(this, 0, 0, 32, 32)]
         ];
 
         init();
         run();
       });
-      img.src = "res/ge_mini.png";
+      img.src = "res/ge_min.png";
     };
 
     function init() {
@@ -70,18 +70,18 @@
         for (var j = 0; j < 10; j++) {
           var a = rows[i];
           aliens.push({
-            sprite: geSprite[a],
+            sprite: sponserSprite[a],
             x: 30 + j*30 + [0, 0, 0][a],
             y: 30 + i*30,
-            w: geSprite[a][0].w,
-            h: geSprite[a][0].h
+            w: sponserSprite[a][0].w,
+            h: sponserSprite[a][0].h
           });
         }
       }
     };
 
     function run() {
-      console.log("Hi!");
+      console.log("Game Running!");
       var loop = function() {
         update();
         render();
@@ -168,11 +168,11 @@
           for (var j = 0; j < 10; j++) {
             var a = rows[i];
             aliens.push({
-              sprite: geSprite[a],
+              sprite: sponserSprite[a],
               x: 30 + j*30 + [0, 0, 0][a],
               y: 30 + i*30,
-              w: geSprite[a][0].w,
-              h: geSprite[a][0].h
+              w: sponserSprite[a][0].w,
+              h: sponserSprite[a][0].h
             });
           }
         }
@@ -183,7 +183,6 @@
       if (aliens.length === 0 && waveCount === 2) {
         //set waveCount to 2nd Wave
         waveCount++;
-        console.log("test!");
         //set what types of monsters you want on each row
         var rows = [0];
         //populate the aliens array with monster objects
