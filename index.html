@@ -112,16 +112,30 @@
       for (var i = 0, len = projectiles.length; i < len; i++) {
         var p = projectiles[i];
 
-        projectiles[i].update();
+        p.update();
 
-        //Projectile collision with monsters
-        //Minbounds and Maxbounds
+        //Minbounds and Maxbounds for projectiles
         if (p.y + p.height < 0 || p.y > screen.height) {
           projectiles.splice(i, 1);
           i--;
           len--;
           continue;
         }
+      }
+      //Aliens to fire projectiles
+      if (Math.random() < 0.99 && aliens.length > 0) {
+        //Select random alien object b to fire from alien objects array
+        var a = aliens[Math.round(Math.random() * (aliens.length - 1))];
+        //Go through entire aliens object array and compare if it matches randomly selected alien object a
+        for (var i = 0, len = aliens.length; i < len; i++) {
+          var b = aliens[i];
+
+          if (AABBIntersect(a.x, a.y, a.w, 100, b.x, b.y, b.w, b.h)) {
+            a = b;
+          }
+        }
+        //Generate new projectile to be drawn and fired from selected alien object
+        projectiles.push(new Projectile(a.x + a.w*0.5, a.y + a.h, 4, 2, 4, "#fff"));
       }
 
       frames++;
