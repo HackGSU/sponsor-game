@@ -48,7 +48,7 @@
     function init() {
       frames = 0;
       spFrame = 0;
-      lvFrame = 5;
+      lvFrame = 50;
       dir = 1;
 
       player = {
@@ -136,7 +136,7 @@
       }
       //Aliens to fire projectiles
       //Math.random generates number from [0.0, 1) multiple by 60 to get avg # of frames passed per shot
-      if (Math.random() < 0.99 && aliens.length > 0) {
+      if (Math.random() < 0.1 && aliens.length > 0) {
         //Select random alien object b to fire from alien objects array
         var a = aliens[Math.round(Math.random() * (aliens.length - 1))];
         //Go through entire aliens object array and compare if it matches randomly selected alien object a
@@ -148,7 +148,7 @@
           }
         }
         //Generate new projectile to be drawn and fired from selected alien object
-        projectiles.push(new Projectile(a.x + a.w*0.5, a.y + a.h, 4, 2, 4, "#fff"));
+        projectiles.push(new Projectile(a.x + a.w*0.5, a.y + a.h, 5, 2, 4, "#fff"));
       }
 
       frames++;
