@@ -5,10 +5,30 @@
   <title>TEST</title>
   <script src="js/helpers.js"></script>
   <style>
+  #myStartScreen {
+    background-color: #3255A4;
+    position: absolute;
+    z-index: 10;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
   canvas {
     background-color: #000;
     display: block;
     position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  #myCreditsScreen {
+    background-color: green;
+    position: absolute;
+    z-index: 10;
     margin: auto;
     top: 0;
     bottom: 0;
@@ -20,7 +40,7 @@
 <body>
   <script>
     var screen, input, frames;
-    var sponserSprite, plSprite, bossSprite, waveCount, bossHealth;
+    var sponserSprite, plSprite, bossSprite, waveCount;
     var aliens, dir, player, projectiles, cities;
 
     function main() {
@@ -53,7 +73,6 @@
       lvFrame = 50;
       waveCount = 1;
       dir = 1;
-      bossHealth = 100;
 
       player = {
         sprite: plSprite,
@@ -132,13 +151,21 @@
           var a = aliens[j];
           if (AABBIntersect(p.x, p.y, p.width, p.height, a.x, a.y, a.w, a.h)) {
             if (a.boss === true) {
+              //removes health from the boss on every hit
               console.log('You hit the boss!');
-              // a.health--;
-              // console.log(a.health);
-              //decrement the health value of the boss
-              //if the value of the boss is less than or equal to zero then splice him like the others
+              a.health--;
+              console.log(a.health);
+              //Destroys the Boss if the health is zero
+              if (a.health <= 0) {
+                console.log('Boss is finished!');
+                aliens.splice(j, 1);
+                j--;
+                len2--;
+                projectiles.splice(i, 1);
+                i--;
+                len--;
+              }
             } else {
-              console.log(a);
               aliens.splice(j, 1);
               j--;
               len2--;
@@ -206,7 +233,7 @@
               w: bossSprite[a][0].w,
               h: bossSprite[a][0].h,
               boss: true,
-              health: 100
+              health: 20
             });
           }
         }
@@ -259,6 +286,32 @@
       screen.drawSprite(player.sprite, player.x, player.y);
     };
 
+    function startScreen() {
+      var myStartScreen = document.createElement('div');
+      myStartScreen.setAttribute("style","width:504px; height:600px");
+      myStartScreen.id = 'myStartScreen';
+      var titleScreen = document.createElement('p');
+      titleScreen.setAttribute("style","width:100%; height:60px; display: block; margin: auto; text-align: center; color: white;");
+      titleScreen.innerHTML = 'Attack of the Sponsors';
+      myStartScreen.appendChild(titleScreen);
+      var startButton = document.createElement('button');
+      startButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
+      myStartScreen.appendChild(startButton);
+      var creditsButton = document.createElement('button');
+      creditsButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
+      myStartScreen.appendChild(creditsButton);
+      var challengeButton = document.createElement('button');
+      challengeButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
+      myStartScreen.appendChild(challengeButton);
+
+      document.body.appendChild(myStartScreen);
+    };
+
+    //Render the Start screen
+    startScreen();
+    //Render the Credits screen
+
+    //cheat by overlaying an html5 dialogue box over the canvas, and when the canvas is selected then start the game.
   main();
   </script>
 </body>
