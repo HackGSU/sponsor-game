@@ -92,14 +92,14 @@
         init();
         run();
       });
-      img.src = "res/ge_min.png";
+      img.src = "res/hackGSU_Sprites.png";
     };
 
     function init() {
       renderButtons();
       frames = 0;
       spFrame = 0;
-      lvFrame = 50;
+      lvFrame = 100;
       waveCount = 1;
       dir = 1;
 
@@ -145,20 +145,16 @@
     function update() {
 
       if (input.isDown(37)) { //LEFT
-        movePlayerLeft();
-        // player.x -= 15;
+        player.x -= 8;
       }
       if (input.isDown(39)) { //RIGHT
-        movePlayerRight();
-        // player.x += 15;
+        player.x += 8;
       }
       if (input.isDown(40)) { //UP
-        movePlayerUp();
-        // player.y += 15;
+        player.y += 8;
       }
       if (input.isDown(38)) { //DOWN
-        movePlayerDown();
-        // player.y -= 15;
+        player.y -= 8;
       }
       //Max Width of movement
       player.x = Math.max(Math.min(player.x, screen.width - (30 + plSprite.w)), 30);
@@ -166,8 +162,8 @@
       player.y = Math.max(Math.min(player.y, screen.height - (30 + plSprite.h)), 300);
 
       //creates the PLAYER projectiles
-      if (true) {
-        projectiles.push(new Projectile(player.x + 15, player.y - 34, -20, 2, 50, "#800080"));
+      if (frames % 30 === 0) {
+        projectiles.push(new Projectile(player.x + 15, player.y - 34, -4, 4, 20, "#800080"));
       }
 
       for (var i = 0, len = projectiles.length; i < len; i++) {
@@ -219,7 +215,7 @@
       }
       //Aliens to fire projectiles
       //Math.random generates number from [0.0, 1) multiple by 60 to get avg # of frames passed per shot
-      if (Math.random() < 0.1 && aliens.length > 0) {
+      if (Math.random() < 0.07 && aliens.length > 0) {
         //Select random alien object b to fire from alien objects array
         var a = aliens[Math.round(Math.random() * (aliens.length - 1))];
         //Go through entire aliens object array and compare if it matches randomly selected alien object a
@@ -425,19 +421,19 @@
     function renderButtons() {
       var mobileControls = document.createElement('div');
       mobileControls.id = 'mobileControls';
-      mobileControls.setAttribute("style","width:504px; height:33px; margin: auto; margin-top: 630px; top: 0; position: relative; z-index: 10;");
+      mobileControls.setAttribute("style","width:504px; height:33px; margin: auto; margin-top: 610px; top: 0; position: relative; z-index: 10;");
       document.body.appendChild(mobileControls);
 
       var leftButton = document.createElement('button');
       leftButton.setAttribute("style","width:252px; height:33px; margin-top: 504px; margin: auto; z-index: 10;");
       leftButton.innerHTML = '<';
-      leftButton.setAttribute("onclick",'movePlayerLeft();');
+      leftButton.setAttribute("onclick",'movePlayerLeft(12);');
       document.getElementById('mobileControls').appendChild(leftButton);
 
       var rightButton = document.createElement('button');
       rightButton.setAttribute("style","width:252px; height:33px; margin-top: 500px; margin-left: 252px; margin: auto; z-index: 10;");
       rightButton.innerHTML = '>';
-      rightButton.setAttribute("onclick",'movePlayerRight();');
+      rightButton.setAttribute("onclick",'movePlayerRight(12);');
       document.getElementById('mobileControls').appendChild(rightButton);
     };
 
@@ -471,28 +467,20 @@
     };
 
     function movePlayerLeft() {
-      player.x -= 25;
+      player.x -= 24;
     };
 
     function movePlayerRight() {
-      player.x += 25;
+      player.x += 24;
     };
 
-    function movePlayerUp() {
-      player.y += 25;
-    };
 
-    function movePlayerDown() {
-      player.y -= 25;
-    };
+    //INITIATLIZE EVERYTHING!!!!!!
     //render movement buttons
     //Render the Start screen
     setTimeout(endCredits, 100);
     startScreen();
-    //Render the Credits screen
 
-    //cheat by overlaying an html5 dialogue box over the canvas, and when the canvas is selected then start the game.
-    // mainGame();
   </script>
 </body>
 </html>
