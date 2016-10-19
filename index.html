@@ -40,6 +40,17 @@
     left: 0;
     right: 0;
   }
+
+  #myCongratsScreen {
+    background-image: url(stars.gif);
+    position: absolute;
+    margin: auto;
+    margin-top: 30px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
   </style>
 </head>
 <body>
@@ -248,7 +259,8 @@
 
       //END CREDITS
       if (aliens.length === 0 && waveCount === 3) {
-        setTimeout(endCredits, 1500);
+        setTimeout(congrats, 1500);
+        setTimeout(endCredits, 8000);
         //Display credits function
         // endCredits();
         waveCount++;
@@ -323,12 +335,16 @@
       if (oldcanv) {
       var oldControl = document.getElementById('mobileControls');
       document.body.removeChild(oldcanv);
-      document.body.removeChild(oldControl);
+      // document.body.removeChild(oldControl);
       }
       mainGame();
     };
 
     function endCredits() {
+      var oldControl = document.getElementById('mobileControls');
+      if (oldControl) {
+      document.body.removeChild(oldControl);
+      }
       var myCreditsScreen = document.createElement('div');
       myCreditsScreen.setAttribute("style","width:504px; height:600px; font-family: arial;");
       myCreditsScreen.id = 'myCreditsScreen';
@@ -380,8 +396,20 @@
       rightButton.innerHTML = '>';
       rightButton.setAttribute("onclick",'movePlayerRight();');
       document.getElementById('mobileControls').appendChild(rightButton);
+    };
 
-
+    function congrats() {
+      var myCongratsScreen = document.createElement('div');
+      myCongratsScreen.id = 'myCongratsScreen';
+      myCongratsScreen.setAttribute("style","width:504px; height:600px; font-family: arial;");
+      var congratsMessage = document.createElement('h1');
+      congratsMessage.setAttribute("style","width:100%; height:80px; top: 250px; display: block; margin: auto; text-align: center; color: Orange;");
+      congratsMessage.innerHTML = 'YOU WON!!!!!! <br> OMEGA GOOD JOB!';
+      myCongratsScreen.appendChild(congratsMessage);
+      var imgCongrats = document.createElement('img');
+      imgCongrats.src="winner.gif";
+      myCongratsScreen.appendChild(imgCongrats);
+      document.body.appendChild(myCongratsScreen);
     };
 
     function movePlayerLeft() {
