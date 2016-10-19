@@ -20,7 +20,7 @@
 <body>
   <script>
     var screen, input, frames;
-    var sponserSprite, plSprite, bossSprite, waveCount;
+    var sponserSprite, plSprite, bossSprite, waveCount, bossHealth;
     var aliens, dir, player, projectiles, cities;
 
     function main() {
@@ -53,6 +53,7 @@
       lvFrame = 50;
       waveCount = 1;
       dir = 1;
+      bossHealth = 100;
 
       player = {
         sprite: plSprite,
@@ -130,12 +131,21 @@
         for (var j = 0, len2 = aliens.length; j < len2; j++) {
           var a = aliens[j];
           if (AABBIntersect(p.x, p.y, p.width, p.height, a.x, a.y, a.w, a.h)) {
-            aliens.splice(j, 1);
-            j--;
-            len2--;
-            projectiles.splice(i, 1);
-            i--;
-            len--;
+            if (a.boss === true) {
+              console.log('You hit the boss!');
+              // a.health--;
+              // console.log(a.health);
+              //decrement the health value of the boss
+              //if the value of the boss is less than or equal to zero then splice him like the others
+            } else {
+              console.log(a);
+              aliens.splice(j, 1);
+              j--;
+              len2--;
+              projectiles.splice(i, 1);
+              i--;
+              len--;
+            }
           }
         }
       }
@@ -194,7 +204,9 @@
               x: 200 + j*30,
               y: 100 + i*30,
               w: bossSprite[a][0].w,
-              h: bossSprite[a][0].h
+              h: bossSprite[a][0].h,
+              boss: true,
+              health: 100
             });
           }
         }
