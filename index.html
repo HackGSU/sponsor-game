@@ -260,7 +260,7 @@
       //END CREDITS
       if (aliens.length === 0 && waveCount === 3) {
         setTimeout(congrats, 1500);
-        setTimeout(endCredits, 8000);
+        setTimeout(endCredits, 6000);
         //Display credits function
         // endCredits();
         waveCount++;
@@ -312,7 +312,7 @@
       myStartScreen.id = 'myStartScreen';
       var titleName = document.createElement('h1');
       titleName.setAttribute("style","width:100%; height:60px; display: block; margin: auto; text-align: center; color: white;");
-      titleName.innerHTML = 'Attack of the Sponsors';
+      titleName.innerHTML = 'ATTACK OF THE SPONSORS';
       myStartScreen.appendChild(titleName);
       var startButton = document.createElement('button');
       startButton.setAttribute("style","width:244px; height:75px; margin-left: 5px; margin-top: 460px; background-color: #42A5F5; border: black; ");
@@ -352,8 +352,19 @@
       titleName.setAttribute("style","width:100%; height:60px; display: block; margin: auto; text-align: center; color: white;");
       titleName.innerHTML = 'Credits';
       myCreditsScreen.appendChild(titleName);
+
+      var titleCred = document.createElement('p');
+      titleCred.setAttribute("style","font-size: 15px; display: block; margin: auto; text-align: center; color: white;");
+      titleCred.innerHTML = ' <br>Special Thanks to our Wonderful Sponsors for Making HackGSU Possible: ';
+      titleName.appendChild(titleCred);
+
+      var imgSponsor = document.createElement('img');
+      imgSponsor.setAttribute("style","width:85%; height: 420px; display: block; position: float; margin: auto; margin-top: 20px; ");
+      imgSponsor.src="Sponsors.png";
+      titleName.appendChild(imgSponsor);
+
       var startButton = document.createElement('button');
-      startButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
+      startButton.setAttribute("style","width:490px; height:45px; margin-left: 5px; margin-top: 490px; background-color: lightblue; border: black; ");
       startButton.innerHTML = 'Menu';
       startButton.setAttribute("onclick",'creditsToStart();');
       myCreditsScreen.appendChild(startButton);
@@ -404,7 +415,7 @@
       myCongratsScreen.setAttribute("style","width:504px; height:600px; font-family: arial;");
       var congratsMessage = document.createElement('h1');
       congratsMessage.setAttribute("style","width:100%; height:80px; top: 250px; display: block; margin: auto; text-align: center; color: Orange;");
-      congratsMessage.innerHTML = 'YOU WON!!!!!! <br> OMEGA GOOD JOB!';
+      congratsMessage.innerHTML = 'VICTORY!!!!!!';
       myCongratsScreen.appendChild(congratsMessage);
       var imgCongrats = document.createElement('img');
       imgCongrats.src="winner.gif";
@@ -429,7 +440,7 @@
     };
     //render movement buttons
     //Render the Start screen
-    endCredits();
+    setTimeout(endCredits, 100);
     startScreen();
     //Render the Credits screen
 
