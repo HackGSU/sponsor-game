@@ -81,12 +81,12 @@
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
-          [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
+          [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)]
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)]
         ];
-        plSprite = new Sprite(this, 0, 0, 32, 32);
+        plSprite = new Sprite(this, 0, 0, 54, 54);
         bossSprite = [
-          [new Sprite(this, 0, 0, 32, 32), new Sprite(this, 0, 0, 32, 32)]
+          [new Sprite(this, 75, 75, 150, 150), new Sprite(this, 0, 0, 32, 32)]
         ];
 
         init();
@@ -116,15 +116,15 @@
 
       aliens = [];
       //set what types of monsters you want on each row
-      var rows = [1, 0, 0 , 2, 2];
+      var rows = [0, 0, 0 , 0, 0];
       //populate the 1st WAVE aliens array with monster objects
       for (var i = 0, len = rows.length; i < len; i++) {
         for (var j = 0; j < 10; j++) {
           var a = rows[i];
           aliens.push({
             sprite: sponserSprite[a],
-            x: 30 + j*30 + [0, 0, 0][a],
-            y: 30 + i*30,
+            x: 30 + j*40 + [0, 0, 0][a],
+            y: 30 + i*40,
             w: sponserSprite[a][0].w,
             h: sponserSprite[a][0].h
           });
@@ -287,7 +287,7 @@
 
       //GAME OVER DEATH SCREEN
       if (player.health === 0 && (waveCount === 1 || waveCount === 2 || waveCount === 3)) {
-        setTimeout(gameOver, 1500);
+        setTimeout(gameOver, 750);
         setTimeout(endCredits, 4500);
         waveCount++;
       }
