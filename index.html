@@ -119,16 +119,20 @@
     function update() {
 
       if (input.isDown(37)) { //LEFT
-        player.x -= 15;
+        movePlayerLeft();
+        // player.x -= 15;
       }
       if (input.isDown(39)) { //RIGHT
-        player.x += 15;
+        movePlayerRight();
+        // player.x += 15;
       }
       if (input.isDown(40)) { //UP
-        player.y += 15;
+        movePlayerUp();
+        // player.y += 15;
       }
       if (input.isDown(38)) { //DOWN
-        player.y -= 15;
+        movePlayerDown();
+        // player.y -= 15;
       }
       //Max Width of movement
       player.x = Math.max(Math.min(player.x, screen.width - (30 + plSprite.w)), 30);
@@ -244,8 +248,9 @@
 
       //END CREDITS
       if (aliens.length === 0 && waveCount === 3) {
+        setTimeout(endCredits, 1500);
         //Display credits function
-        endCredits();
+        // endCredits();
         waveCount++;
           }
 
@@ -298,12 +303,12 @@
       titleName.innerHTML = 'Attack of the Sponsors';
       myStartScreen.appendChild(titleName);
       var startButton = document.createElement('button');
-      startButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
+      startButton.setAttribute("style","width:244px; height:75px; margin-left: 5px; margin-top: 460px; background-color: #42A5F5; border: black; ");
       startButton.innerHTML = 'Start Game';
       startButton.setAttribute("onclick",'startGame();');
       myStartScreen.appendChild(startButton);
       var creditsButton = document.createElement('button');
-      creditsButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
+      creditsButton.setAttribute("style","width:244px; height:75px; margin-top: 460px; background-color: #4CAF50; border: black;");
       creditsButton.innerHTML = 'Credits';
       creditsButton.setAttribute("onclick",'startToCredits();');
       myStartScreen.appendChild(creditsButton);
@@ -316,7 +321,9 @@
       startScreen.style.setProperty("z-index"," -1");
       var oldcanv = document.getElementById('gameScreen');
       if (oldcanv) {
+      var oldControl = document.getElementById('mobileControls');
       document.body.removeChild(oldcanv);
+      document.body.removeChild(oldControl);
       }
       mainGame();
     };
@@ -339,6 +346,10 @@
     };
 
     function creditsToStart() {
+      var controlsOnScreen = document.getElementById('mobileControls');
+      if (controlsOnScreen) {
+        document.body.removeChild(controlsOnScreen);
+      }
       var creditsScreen = document.getElementById('myCreditsScreen');
       creditsScreen.style.setProperty("z-index"," -1");
       var startScreen = document.getElementById('myStartScreen');
@@ -374,13 +385,20 @@
     };
 
     function movePlayerLeft() {
-      player.x -= 20;
+      player.x -= 25;
     };
 
     function movePlayerRight() {
-      player.x += 20;
-    }
+      player.x += 25;
+    };
 
+    function movePlayerUp() {
+      player.y += 25;
+    };
+
+    function movePlayerDown() {
+      player.y -= 25;
+    };
     //render movement buttons
     //Render the Start screen
     endCredits();
