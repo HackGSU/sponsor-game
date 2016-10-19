@@ -2,13 +2,12 @@
 <html lang='en'>
 <head>
   <meta charset="utf-8">
-  <title>TEST</title>
+  <title>Attack of the Sponsors</title>
   <script src="js/helpers.js"></script>
   <style>
   #myStartScreen {
     background-image: url(stars.gif);
     position: absolute;
-    z-index: 10;
     margin: auto;
     top: 0;
     bottom: 0;
@@ -26,9 +25,8 @@
     right: 0;
   }
   #myCreditsScreen {
-    background-color: green;
+    background-image: url(stars.gif);
     position: absolute;
-    z-index: 10;
     margin: auto;
     top: 0;
     bottom: 0;
@@ -150,6 +148,9 @@
         for (var j = 0, len2 = aliens.length; j < len2; j++) {
           var a = aliens[j];
           if (AABBIntersect(p.x, p.y, p.width, p.height, a.x, a.y, a.w, a.h)) {
+            projectiles.splice(i, 1);
+            i--;
+            len--;
             if (a.boss === true) {
               //removes health from the boss on every hit
               console.log('You hit the boss!');
@@ -161,17 +162,11 @@
                 aliens.splice(j, 1);
                 j--;
                 len2--;
-                projectiles.splice(i, 1);
-                i--;
-                len--;
               }
             } else {
               aliens.splice(j, 1);
               j--;
               len2--;
-              projectiles.splice(i, 1);
-              i--;
-              len--;
             }
           }
         }
@@ -241,9 +236,9 @@
 
       //END CREDITS
       if (aliens.length === 0 && waveCount === 3) {
-        //set waveCount to 2nd Wave
+        //Display credits function
+        endCredits();
         waveCount++;
-        console.log("CONGRATULATIONS!");
           }
 
       frames++;
@@ -288,12 +283,12 @@
 
     function startScreen() {
       var myStartScreen = document.createElement('div');
-      myStartScreen.setAttribute("style","width:504px; height:600px; font-family: arial");
+      myStartScreen.setAttribute("style","width:504px; height:600px; font-family: arial; z-index: 1;");
       myStartScreen.id = 'myStartScreen';
-      var titleScreen = document.createElement('p');
-      titleScreen.setAttribute("style","width:100%; height:60px; display: block; margin: auto; text-align: center; color: white;");
-      titleScreen.innerHTML = 'Attack of the Sponsors';
-      myStartScreen.appendChild(titleScreen);
+      var titleName = document.createElement('p');
+      titleName.setAttribute("style","width:100%; height:60px; display: block; margin: auto; text-align: center; color: white;");
+      titleName.innerHTML = 'Attack of the Sponsors';
+      myStartScreen.appendChild(titleName);
       var startButton = document.createElement('button');
       startButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
       startButton.innerHTML = 'Start Game';
@@ -306,6 +301,7 @@
       var creditsButton = document.createElement('button');
       creditsButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
       creditsButton.innerHTML = 'Credits';
+      creditsButton.setAttribute("onclick",'startToCredits();');
       myStartScreen.appendChild(creditsButton);
 
       document.body.appendChild(myStartScreen);
@@ -314,10 +310,46 @@
     function startGame() {
       var startScreen = document.getElementById('myStartScreen');
       startScreen.style.setProperty("z-index"," -1");
+      var oldcanv = document.getElementById('gameScreen');
+      if (oldcanv) {
+      document.body.removeChild(oldcanv);
+      }
       mainGame();
     };
 
+    function endCredits() {
+      var myCreditsScreen = document.createElement('div');
+      myCreditsScreen.setAttribute("style","width:504px; height:600px; font-family: arial;");
+      myCreditsScreen.id = 'myCreditsScreen';
+      var titleName = document.createElement('h1');
+      titleName.setAttribute("style","width:100%; height:60px; display: block; margin: auto; text-align: center; color: white;");
+      titleName.innerHTML = 'Credits';
+      myCreditsScreen.appendChild(titleName);
+      var startButton = document.createElement('button');
+      startButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
+      startButton.innerHTML = 'Start Game';
+      startButton.setAttribute("onclick",'creditsToStart();');
+      myCreditsScreen.appendChild(startButton);
+
+      document.body.appendChild(myCreditsScreen);
+    };
+
+    function creditsToStart() {
+      var creditsScreen = document.getElementById('myCreditsScreen');
+      creditsScreen.style.setProperty("z-index"," -1");
+      var startScreen = document.getElementById('myStartScreen');
+      startScreen.style.setProperty("z-index"," 1");
+    }
+
+    function startToCredits() {
+      var creditsScreen = document.getElementById('myCreditsScreen');
+      creditsScreen.style.setProperty("z-index"," 1");
+      var startScreen = document.getElementById('myStartScreen');
+      startScreen.style.setProperty("z-index"," -1");
+    }
+
     //Render the Start screen
+    endCredits();
     startScreen();
     //Render the Credits screen
 

@@ -21,6 +21,7 @@ Projectile.prototype.update = function() {
 // Screen
 function Screen(width, height) {
   this.canvas = document.createElement("canvas");
+  this.canvas.id = 'gameScreen';
   this.canvas.width = this.width = width;
   this.canvas.height = this.height = height;
   this.ctx = this.canvas.getContext("2d");
