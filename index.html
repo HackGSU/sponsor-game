@@ -6,7 +6,7 @@
   <script src="js/helpers.js"></script>
   <style>
   #myStartScreen {
-    background-color: #3255A4;
+    background-image: url(stars.gif);
     position: absolute;
     z-index: 10;
     margin: auto;
@@ -16,7 +16,7 @@
     right: 0;
   }
   canvas {
-    background-color: #000;
+    background-image: url(stars.gif);
     display: block;
     position: absolute;
     margin: auto;
@@ -296,23 +296,26 @@
       myStartScreen.appendChild(titleScreen);
       var startButton = document.createElement('button');
       startButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
+      startButton.innerHTML = 'Start Game';
       myStartScreen.appendChild(startButton);
-      var creditsButton = document.createElement('button');
-      creditsButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
-      myStartScreen.appendChild(creditsButton);
       var challengeButton = document.createElement('button');
       challengeButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
+      challengeButton.innerHTML = 'Challenge Boss';
       myStartScreen.appendChild(challengeButton);
+      var creditsButton = document.createElement('button');
+      creditsButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
+      creditsButton.innerHTML = 'Roll Credits';
+      myStartScreen.appendChild(creditsButton);
 
       document.body.appendChild(myStartScreen);
     };
 
     //Render the Start screen
-    startScreen();
+    // startScreen();
     //Render the Credits screen
 
     //cheat by overlaying an html5 dialogue box over the canvas, and when the canvas is selected then start the game.
-  main();
+    main();
   </script>
 </body>
 </html>
