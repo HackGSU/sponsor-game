@@ -9,6 +9,7 @@
     background-image: url(stars.gif);
     position: absolute;
     margin: auto;
+    margin-top: 30px;
     top: 0;
     bottom: 0;
     left: 0;
@@ -19,6 +20,7 @@
     display: block;
     position: absolute;
     margin: auto;
+    margin-top: 30px;
     top: 0;
     bottom: 0;
     left: 0;
@@ -28,6 +30,7 @@
     background-image: url(stars.gif);
     position: absolute;
     margin: auto;
+    margin-top: 30px;
     top: 0;
     bottom: 0;
     left: 0;
@@ -346,17 +349,24 @@
     };
 
     function renderButtons() {
+      var mobileControls = document.createElement('div');
+      mobileControls.id = 'mobileControls';
+      mobileControls.setAttribute("style","width:504px; height:33px; margin: auto; margin-top: 630px; top: 0; position: relative; z-index: 10;");
+      document.body.appendChild(mobileControls);
+
       var leftButton = document.createElement('button');
-      leftButton.setAttribute("style","width:252px; height:33px; margin-top: 500px; display: block; margin: auto; z-index: 10;");
+      leftButton.setAttribute("style","width:252px; height:33px; margin-top: 504px; margin: auto; z-index: 10;");
       leftButton.innerHTML = '<';
       leftButton.setAttribute("onclick",'movePlayerLeft();');
-      document.body.appendChild(leftButton);
+      document.getElementById('mobileControls').appendChild(leftButton);
 
       var rightButton = document.createElement('button');
-      rightButton.setAttribute("style","width:252px; height:33px; margin-top: 500px; display: block; margin: auto; z-index: 10;");
+      rightButton.setAttribute("style","width:252px; height:33px; margin-top: 500px; margin-left: 252px; margin: auto; z-index: 10;");
       rightButton.innerHTML = '>';
       rightButton.setAttribute("onclick",'movePlayerRight();');
-      document.body.appendChild(rightButton);
+      document.getElementById('mobileControls').appendChild(rightButton);
+
+
     };
 
     function movePlayerLeft() {
