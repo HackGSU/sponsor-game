@@ -66,6 +66,7 @@
     };
 
     function init() {
+      renderButtons();
       frames = 0;
       spFrame = 0;
       lvFrame = 50;
@@ -285,7 +286,7 @@
       var myStartScreen = document.createElement('div');
       myStartScreen.setAttribute("style","width:504px; height:600px; font-family: arial; z-index: 1;");
       myStartScreen.id = 'myStartScreen';
-      var titleName = document.createElement('p');
+      var titleName = document.createElement('h1');
       titleName.setAttribute("style","width:100%; height:60px; display: block; margin: auto; text-align: center; color: white;");
       titleName.innerHTML = 'Attack of the Sponsors';
       myStartScreen.appendChild(titleName);
@@ -294,10 +295,6 @@
       startButton.innerHTML = 'Start Game';
       startButton.setAttribute("onclick",'startGame();');
       myStartScreen.appendChild(startButton);
-      var challengeButton = document.createElement('button');
-      challengeButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
-      challengeButton.innerHTML = 'Challenge Boss';
-      myStartScreen.appendChild(challengeButton);
       var creditsButton = document.createElement('button');
       creditsButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
       creditsButton.innerHTML = 'Credits';
@@ -327,7 +324,7 @@
       myCreditsScreen.appendChild(titleName);
       var startButton = document.createElement('button');
       startButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
-      startButton.innerHTML = 'Start Game';
+      startButton.innerHTML = 'Menu';
       startButton.setAttribute("onclick",'creditsToStart();');
       myCreditsScreen.appendChild(startButton);
 
@@ -339,15 +336,38 @@
       creditsScreen.style.setProperty("z-index"," -1");
       var startScreen = document.getElementById('myStartScreen');
       startScreen.style.setProperty("z-index"," 1");
-    }
+    };
 
     function startToCredits() {
       var creditsScreen = document.getElementById('myCreditsScreen');
       creditsScreen.style.setProperty("z-index"," 1");
       var startScreen = document.getElementById('myStartScreen');
       startScreen.style.setProperty("z-index"," -1");
+    };
+
+    function renderButtons() {
+      var leftButton = document.createElement('button');
+      leftButton.setAttribute("style","width:252px; height:33px; margin-top: 500px; display: block; margin: auto; z-index: 10;");
+      leftButton.innerHTML = '<';
+      leftButton.setAttribute("onclick",'movePlayerLeft();');
+      document.body.appendChild(leftButton);
+
+      var rightButton = document.createElement('button');
+      rightButton.setAttribute("style","width:252px; height:33px; margin-top: 500px; display: block; margin: auto; z-index: 10;");
+      rightButton.innerHTML = '>';
+      rightButton.setAttribute("onclick",'movePlayerRight();');
+      document.body.appendChild(rightButton);
+    };
+
+    function movePlayerLeft() {
+      player.x -= 20;
+    };
+
+    function movePlayerRight() {
+      player.x += 20;
     }
 
+    //render movement buttons
     //Render the Start screen
     endCredits();
     startScreen();
