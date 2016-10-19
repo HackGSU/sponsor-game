@@ -43,7 +43,7 @@
     var sponserSprite, plSprite, bossSprite, waveCount;
     var aliens, dir, player, projectiles, cities;
 
-    function main() {
+    function mainGame() {
       screen = new Screen(504, 600);
       input = new InputHandler();
 
@@ -288,7 +288,7 @@
 
     function startScreen() {
       var myStartScreen = document.createElement('div');
-      myStartScreen.setAttribute("style","width:504px; height:600px");
+      myStartScreen.setAttribute("style","width:504px; height:600px; font-family: arial");
       myStartScreen.id = 'myStartScreen';
       var titleScreen = document.createElement('p');
       titleScreen.setAttribute("style","width:100%; height:60px; display: block; margin: auto; text-align: center; color: white;");
@@ -297,6 +297,7 @@
       var startButton = document.createElement('button');
       startButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
       startButton.innerHTML = 'Start Game';
+      startButton.setAttribute("onclick",'startGame();');
       myStartScreen.appendChild(startButton);
       var challengeButton = document.createElement('button');
       challengeButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
@@ -304,18 +305,24 @@
       myStartScreen.appendChild(challengeButton);
       var creditsButton = document.createElement('button');
       creditsButton.setAttribute("style","width:250px; height:60px; display: block; margin: auto;");
-      creditsButton.innerHTML = 'Roll Credits';
+      creditsButton.innerHTML = 'Credits';
       myStartScreen.appendChild(creditsButton);
 
       document.body.appendChild(myStartScreen);
     };
 
+    function startGame() {
+      var startScreen = document.getElementById('myStartScreen');
+      startScreen.style.setProperty("z-index"," -1");
+      mainGame();
+    };
+
     //Render the Start screen
-    // startScreen();
+    startScreen();
     //Render the Credits screen
 
     //cheat by overlaying an html5 dialogue box over the canvas, and when the canvas is selected then start the game.
-    main();
+    // mainGame();
   </script>
 </body>
 </html>
