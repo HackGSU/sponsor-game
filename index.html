@@ -88,7 +88,7 @@
       img.addEventListener("load", function() {
         sponserSprite = [
           [new Sprite(this, 6, 7, 42, 36), new Sprite(this, 6, 7, 42, 36)],
-          [new Sprite(this, 2, 240, 42, 36), new Sprite(this, 2, 240, 42, 36)],
+          [new Sprite(this, 2, 240, 38, 36), new Sprite(this, 2, 240, 38, 36)],
           [new Sprite(this, 118, 5, 42, 35), new Sprite(this, 118, 5, 42, 35)],
           [new Sprite(this, 163, 4, 43, 35), new Sprite(this, 163, 4, 43, 35)]
 
@@ -132,8 +132,8 @@
           var a = rows[i];
           aliens.push({
             sprite: sponserSprite[a],
-            x: 30 + j*60 + [0, 0, 0, 0][a],
-            y: 10 + i*50,
+            x: 30 + j*50 + [0, 0, 0, 0][a],
+            y: 10 + i*45,
             w: sponserSprite[a][0].w,
             h: sponserSprite[a][0].h
           });
