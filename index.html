@@ -133,7 +133,7 @@
           aliens.push({
             sprite: sponserSprite[a],
             x: 30 + j*50 + [0, 0, 0, 0][a],
-            y: 20 + i*40,
+            y: 20 + i*55,
             w: sponserSprite[a][0].w,
             h: sponserSprite[a][0].h
           });
@@ -434,7 +434,7 @@
     function renderButtons() {
       var mobileControls = document.createElement('div');
       mobileControls.id = 'mobileControls';
-      mobileControls.setAttribute("style","width:120px; height:55px; margin-left: 15%; margin-top: 510px; top: 0; position: relative;z-index: 10;");
+      mobileControls.setAttribute("style","width:120px; height:55px; margin-left: 10%; margin-top: 510px; top: 0; position: relative;z-index: 10;");
       document.body.appendChild(mobileControls);
 
       var leftButton = document.createElement('button');
