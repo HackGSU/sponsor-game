@@ -10,6 +10,9 @@
   -webkit-appearance: none;
   -webkit-border-radius: 0;
 }
+  button {
+    border-radius: 8px;
+  }
 
   body {
     background-color: black;
@@ -167,8 +170,8 @@
       player.y = Math.max(Math.min(player.y, screen.height - (30 + plSprite.h)), 300);
 
       //creates the PLAYER projectiles
-      if (true) {
-        projectiles.push(new Projectile(player.x + 15, player.y - 34, -40, 4, 5, "#800080"));
+      if (frames % 30 === 0) {
+        projectiles.push(new Projectile(player.x + 15, player.y - 34, -8, 4, 5, "#800080"));
       }
 
       for (var i = 0, len = projectiles.length; i < len; i++) {
@@ -211,11 +214,11 @@
         }
 
 
-                //GAME OVER if Player get hit!
-                // if (AABBIntersect(p.x, p.y, p.width, p.height, player.x, player.y, player.w, player.h) && p.color === "#f00") {
-                //   player.health -= 10;
-                //   console.log('Game OVER!');
-                // }
+                // GAME OVER if Player get hit!
+                if (AABBIntersect(p.x, p.y, p.width, p.height, player.x, player.y, player.w, player.h) && p.color === "#f00") {
+                  player.health -= 10;
+                  console.log('Game OVER!');
+                }
 
       }
       //Aliens to fire projectiles
@@ -293,7 +296,7 @@
       //GAME OVER DEATH SCREEN
       if (player.health === 0 && (waveCount === 1 || waveCount === 2 || waveCount === 3)) {
         setTimeout(gameOver, 500);
-        setTimeout(endCredits, 4500);
+        setTimeout(endCredits, 3000);
         waveCount++;
       }
 

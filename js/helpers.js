@@ -40,7 +40,16 @@ Screen.prototype.drawSprite = function(sp, x, y) {
 //draw Projectile
 Screen.prototype.drawProjectile = function(projectile) {
   this.ctx.fillStyle = projectile.color;
-  this.ctx.fillRect(projectile.x, projectile.y, projectile.width, projectile.height);
+  // this.ctx.fillRect(projectile.x, projectile.y, projectile.width, projectile.height);
+  this.ctx.beginPath();
+  this.ctx.moveTo(projectile.x, projectile.y);
+  this.ctx.bezierCurveTo(projectile.x + 7.5, projectile.y + 3.7, projectile.x + 7.0, projectile.y + 2.5,projectile.x + 5.0, projectile.y + 2.5);
+  this.ctx.bezierCurveTo(projectile.x + 2.0, projectile.y + 2.5, projectile.x + 2.0, projectile.y + 6.25,projectile.x + 2.0, projectile.y + 6.25);
+  this.ctx.bezierCurveTo(projectile.x + 2.0, projectile.y + 8.0, projectile.x + 4.0, projectile.y + 10.2,projectile.x + 7.5, projectile.y + 12.0);
+  this.ctx.bezierCurveTo(projectile.x + 11.0, projectile.y + 10.2, projectile.x + 13.0, projectile.y + 8.0,projectile.x + 13.0, projectile.y + 6.25);
+  this.ctx.bezierCurveTo(projectile.x + 13.0, projectile.y + 6.25, projectile.x + 13.0, projectile.y + 2.5,projectile.x + 10.0, projectile.y + 2.5);
+  this.ctx.bezierCurveTo(projectile.x + 8.5, projectile.y + 2.5, projectile.x + 7.5, projectile.y + 3.7,projectile.x + 7.5, projectile.y + 4.0);
+  this.ctx.fill();
 };
 // Sprite
 function Sprite(img, x, y, w, h) {
