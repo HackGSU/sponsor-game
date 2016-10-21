@@ -81,8 +81,7 @@
           [new Sprite(this, 6, 7, 42, 36), new Sprite(this, 6, 7, 42, 36)],
           [new Sprite(this, 2, 240, 49, 36), new Sprite(this, 2, 240, 49, 36)],
           [new Sprite(this, 118, 5, 42, 35), new Sprite(this, 118, 5, 42, 35)],
-          [new Sprite(this, 163, 4, 42, 35), new Sprite(this, 163, 4, 42, 35)],
-          [new Sprite(this, 163, 4, 43, 41), new Sprite(this, 163, 4, 43, 41)]
+          [new Sprite(this, 163, 4, 43, 35), new Sprite(this, 163, 4, 43, 35)]
 
         ];
         plSprite = new Sprite(this, 62, 5, 50, 50);
@@ -117,14 +116,14 @@
 
       aliens = [];
       //set what types of monsters you want on each row
-      var rows = [0,1,2,4];
+      var rows = [0,1,2,3];
       //populate the 1st WAVE aliens array with monster objects
       for (var i = 0, len = rows.length; i < len; i++) {
         for (var j = 0; j < 7; j++) {
           var a = rows[i];
           aliens.push({
             sprite: sponserSprite[a],
-            x: 30 + j*50 + [0, 0, 0][a],
+            x: 30 + j*50 + [0, 0, 0, 0][a],
             y: 30 + i*50,
             w: sponserSprite[a][0].w,
             h: sponserSprite[a][0].h
