@@ -88,7 +88,7 @@
       img.addEventListener("load", function() {
         sponserSprite = [
           [new Sprite(this, 6, 7, 42, 36), new Sprite(this, 6, 7, 42, 36)],
-          [new Sprite(this, 2, 240, 30, 16), new Sprite(this, 2, 240, 30, 16)],
+          [new Sprite(this, 2, 240, 40, 31), new Sprite(this, 2, 240, 40, 31)],
           [new Sprite(this, 118, 5, 42, 35), new Sprite(this, 118, 5, 42, 35)],
           [new Sprite(this, 163, 4, 43, 35), new Sprite(this, 163, 4, 43, 35)]
 
@@ -125,7 +125,7 @@
 
       aliens = [];
       //set what types of monsters you want on each row
-      var rows = [0,1,2,3];
+      var rows = [0,0,2,3];
       //populate the 1st WAVE aliens array with monster objects
       for (var i = 0, len = rows.length; i < len; i++) {
         for (var j = 0; j < 6; j++) {
