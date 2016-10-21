@@ -81,10 +81,11 @@
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
+          [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)],
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)]
           [new Sprite(this, 0, 0, 22, 16), new Sprite(this, 0, 0, 22, 16)]
         ];
-        plSprite = new Sprite(this, 0, 0, 54, 54);
+        plSprite = new Sprite(this, 8, 3, 54, 58);
         bossSprite = [
           [new Sprite(this, 75, 75, 150, 150), new Sprite(this, 0, 0, 32, 32)]
         ];
@@ -162,8 +163,8 @@
       player.y = Math.max(Math.min(player.y, screen.height - (30 + plSprite.h)), 300);
 
       //creates the PLAYER projectiles
-      if (frames % 30 === 0) {
-        projectiles.push(new Projectile(player.x + 15, player.y - 34, -4, 4, 20, "#800080"));
+      if (true) {
+        projectiles.push(new Projectile(player.x + 15, player.y - 34, -40, 4, 50, "#800080"));
       }
 
       for (var i = 0, len = projectiles.length; i < len; i++) {
@@ -207,10 +208,10 @@
 
 
                 //GAME OVER if Player get hit!
-                if (AABBIntersect(p.x, p.y, p.width, p.height, player.x, player.y, player.w, player.h) && p.color === "#f00") {
-                  player.health -= 10;
-                  console.log('Game OVER!');
-                }
+                // if (AABBIntersect(p.x, p.y, p.width, p.height, player.x, player.y, player.w, player.h) && p.color === "#f00") {
+                //   player.health -= 10;
+                //   console.log('Game OVER!');
+                // }
 
       }
       //Aliens to fire projectiles
@@ -387,18 +388,22 @@
       titleName.appendChild(titleCred);
 
       var imgSponsor = document.createElement('img');
-      imgSponsor.setAttribute("style","width:85%; height: 420px; display: block; position: float; margin: auto; margin-top: 20px; ");
-      imgSponsor.src="Sponsors.png";
+      imgSponsor.setAttribute("style","width:75%; height: 440px; display: block; position: float; margin: auto; margin-top: 20px; ");
+      imgSponsor.src="sponsors.jpg";
       titleName.appendChild(imgSponsor);
 
       var startButton = document.createElement('button');
       startButton.setAttribute("style","width:490px; height:45px; margin-left: 5px; margin-top: 490px; background-color: lightblue; border: black; ");
       startButton.innerHTML = 'Menu';
-      startButton.setAttribute("onclick",'creditsToStart();');
+      startButton.setAttribute("onclick",'pageRefresh();');
       myCreditsScreen.appendChild(startButton);
 
       document.body.appendChild(myCreditsScreen);
     };
+
+    function pageRefresh() {
+      location.reload();
+    }
 
     function creditsToStart() {
       var controlsOnScreen = document.getElementById('mobileControls');
